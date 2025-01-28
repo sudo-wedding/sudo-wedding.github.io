@@ -136,7 +136,7 @@
         <div class="section rsvp">
             <h2>RSVP</h2>
             <p>Let us know if you can join us!</p>
-            <button>RSVP Now</button>
+            <button onclick="sendRSVP()">RSVP Now</button>
         </div>
     </div>
 
@@ -144,4 +144,27 @@
         <p>&copy; 2025 Wedding of Vladimir & Julia</p>
     </footer>
 </body>
+<script>
+    function sendRSVP() {
+        fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userName: 'John Doe', // Example data you might send
+                eventID: '12345'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('RSVP sent successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error sending RSVP');
+        });
+    }
+</script>
 </html>
