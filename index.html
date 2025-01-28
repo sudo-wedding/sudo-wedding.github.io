@@ -224,12 +224,12 @@
                 <input type="text" id="surnameInput" placeholder="Ваша фамилия" />
                 <div class="radio-group">
                     <label>
-                        <input type="radio" name="rsvp" value="accept" id="accept" checked/>
+                        <input type="radio" name="rsvp" value="accept" checked/>
                         <span class="custom-radio"></span>
                         Обязательно буду
                     </label>
                     <label>
-                        <input type="radio" name="rsvp" value="decline" id="decline"/>
+                        <input type="radio" name="rsvp" value="decline" />
                         <span class="custom-radio"></span>
                         К сожалению, не смогу присутствовать
                     </label>
@@ -265,8 +265,8 @@
             },
             body: JSON.stringify({
                 name: name,
-                surame: surname,
-                answer: rsvpStatus
+                surname: surname
+                // answer: rsvpStatus
             })
         })
         .then(response => response.json())
