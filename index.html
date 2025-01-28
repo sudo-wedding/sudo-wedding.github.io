@@ -136,6 +136,9 @@
         <div class="section rsvp">
             <h2>RSVP</h2>
             <p>Let us know if you can join us!</p>
+            <label for="nameInput">Your Name:</label>
+            <input type="text" id="nameInput" placeholder="Enter your name" />
+            <br />
             <button onclick="sendRSVP()">RSVP Now</button>
         </div>
     </div>
@@ -146,14 +149,20 @@
 </body>
 <script>
     function sendRSVP() {
-        fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
+        const userName = document.getElementById('nameInput').value; // Get value from text field
+        if (!userName) {
+            alert('Please enter your name.');
+            return;
+        }
+
+        fetch('https://your-api-endpoint.com/rsvp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userName: 'John Doe', // Example data you might send
-                eventID: '12345'
+                userName: userName, // Send the name from the text field
+                eventID: '12345'    // Example data you might send
             })
         })
         .then(response => response.json())
