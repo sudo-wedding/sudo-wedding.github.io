@@ -273,8 +273,7 @@
         .then(data => {
             console.log('Success:', data);
             alert('RSVP sent successfully!');
-            // document.getElementById('rsvpForm').reset();
-            // window.location.reload(); // Refresh the page after the user clicks "OK"
+            window.location.href = 'https://sudo-wedding.github.io';
         })
         .catch(error => {
             console.error('Error:', error);
