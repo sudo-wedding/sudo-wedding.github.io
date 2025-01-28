@@ -164,6 +164,7 @@
             <p>Let us know if you can join us!</p>
             <label for="nameInput">Your Name:</label>
             <input type="text" id="nameInput" placeholder="Enter your name" />
+            <input type="text" id="surnameInput" placeholder="Enter your surname" />
             <br />
             <button onclick="sendRSVP()">RSVP Now</button>
         </div>
@@ -175,9 +176,14 @@
 </body>
 <script>
     function sendRSVP() {
-        const userName = document.getElementById('nameInput').value; // Get value from text field
-        if (!userName) {
+        const name = document.getElementById('nameInput').value; // Get value from text field
+        const surame = document.getElementById('surnameInput').value; // Get value from text field
+        if (!name) {
             alert('Please enter your name.');
+            return;
+        }
+        if (!surame) {
+            alert('Please enter your surname.');
             return;
         }
 
@@ -187,14 +193,15 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userName: userName, // Send the name from the text field
-                eventID: '12345'    // Example data you might send
+                name: name,
+                surame: surame
             })
         })
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
             alert('RSVP sent successfully!');
+            window.location.reload(); // Refresh the page after the user clicks "OK"
         })
         .catch(error => {
             console.error('Error:', error);
