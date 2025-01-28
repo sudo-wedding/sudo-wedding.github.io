@@ -273,6 +273,8 @@
         .then(data => {
             console.log('Success:', data);
             alert('RSVP sent successfully!');
+            const url = window.location.origin + window.location.pathname;
+            history.replaceState(null, '', url);
         })
         .catch(error => {
             console.error('Error:', error);
