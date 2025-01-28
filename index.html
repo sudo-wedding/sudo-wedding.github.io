@@ -224,12 +224,12 @@
                 <input type="text" id="surnameInput" placeholder="Ваша фамилия" />
                 <div class="radio-group">
                     <label>
-                        <input type="radio" name="rsvp" value="accept" checked=true/>
+                        <input type="radio" name="accept" value="accept" id="accept" checked/>
                         <span class="custom-radio"></span>
                         Обязательно буду
                     </label>
                     <label>
-                        <input type="radio" name="rsvp" value="decline" />
+                        <input type="radio" name="decline" value="decline" id="decline"/>
                         <span class="custom-radio"></span>
                         К сожалению, не смогу присутствовать
                     </label>
@@ -248,7 +248,7 @@
     function sendRSVP() {
         const name = document.getElementById('nameInput').value; // Get value from text field
         const surname = document.getElementById('surnameInput').value; // Get value from text field
-        const rsvpStatus = document.querySelector('input[name="rsvp"]:checked');
+        const rsvpStatus = document.queryElementById('accept').checked;
         if (!name) {
             alert('Please enter your name.');
             return;
@@ -257,9 +257,13 @@
             alert('Please enter your surname.');
             return;
         }
+<<<<<<< HEAD
         console.log(rsvpStatus)
         // const response = rsvpStatus.value === 'accept' ? 'Обязательно буду' : 'К сожалению, не смогу присутствовать';
 
+=======
+        
+>>>>>>> b2462dd (change form logic)
         fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
             method: 'POST',
             headers: {
@@ -268,7 +272,7 @@
             body: JSON.stringify({
                 name: name,
                 surame: surname,
-                // answer: response
+                answer: rsvpStatus
             })
         })
         .then(response => response.json())
