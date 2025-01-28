@@ -222,7 +222,7 @@
                 <label for="nameInput">Ответ</label>
                 <input type="text" id="nameInput" placeholder="Ваше имя" />
                 <input type="text" id="surnameInput" placeholder="Ваша фамилия" />
-                <div class="radio-group">
+                <!-- <div class="radio-group">
                     <label>
                         <input type="radio" name="rsvp" value="accept" checked=true/>
                         <span class="custom-radio"></span>
@@ -233,7 +233,7 @@
                         <span class="custom-radio"></span>
                         К сожалению, не смогу присутствовать
                     </label>
-                </div>
+                </div> -->
                 <br />
                 <button onclick="sendRSVP()">Послать ответ</button>
             </form>
@@ -247,18 +247,18 @@
 <script>
     function sendRSVP() {
         const name = document.getElementById('nameInput').value; // Get value from text field
-        const surame = document.getElementById('surnameInput').value; // Get value from text field
+        const surname = document.getElementById('surnameInput').value; // Get value from text field
         const rsvpStatus = document.querySelector('input[name="rsvp"]:checked');
         if (!name) {
             alert('Please enter your name.');
             return;
         }
-        if (!surame) {
+        if (!surname) {
             alert('Please enter your surname.');
             return;
         }
 
-        const response = rsvpStatus.value === 'accept' ? 'Обязательно буду' : 'К сожалению, не смогу присутствовать';
+        // const response = rsvpStatus.value === 'accept' ? 'Обязательно буду' : 'К сожалению, не смогу присутствовать';
 
         fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
             method: 'POST',
@@ -267,8 +267,8 @@
             },
             body: JSON.stringify({
                 name: name,
-                surame: surame,
-                answer: response
+                surame: surname,
+                // answer: response
             })
         })
         .then(response => response.json())
