@@ -162,11 +162,13 @@
         <div class="section rsvp">
             <h2>RSVP</h2>
             <p>Let us know if you can join us!</p>
-            <label for="nameInput">Your Name:</label>
-            <input type="text" id="nameInput" placeholder="Enter your name" />
-            <input type="text" id="surnameInput" placeholder="Enter your surname" />
-            <br />
-            <button onclick="sendRSVP()">RSVP Now</button>
+            <form id="rsvpForm">
+                <label for="nameInput">Your Name:</label>
+                <input type="text" id="nameInput" placeholder="Enter your name" />
+                <input type="text" id="surnameInput" placeholder="Enter your surname" />
+                <br />
+                <button onclick="sendRSVP()">RSVP Now</button>
+            </form>
         </div>
     </div>
 
@@ -201,6 +203,7 @@
         .then(data => {
             console.log('Success:', data);
             alert('RSVP sent successfully!');
+            document.getElementById('rsvpForm').reset();
             window.location.reload(); // Refresh the page after the user clicks "OK"
         })
         .catch(error => {
