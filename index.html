@@ -266,7 +266,7 @@
             body: JSON.stringify({
                 name: name,
                 surname: surname,
-                response: response == 'accept' ? true : false
+                response: response
             })
         })
         .then(response => response.json())
