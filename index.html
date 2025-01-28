@@ -74,6 +74,54 @@
             border: 2px solid #3d6b3d;
         }
 
+        /* Fancy Radio Buttons */
+        .rsvp .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .rsvp .radio-group label {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #3d6b3d;
+            cursor: pointer;
+        }
+
+        .rsvp .radio-group input[type="radio"] {
+            display: none; /* Hide default radio buttons */
+        }
+
+        .rsvp .radio-group .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3d6b3d;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .rsvp .radio-group .custom-radio::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background-color: #3d6b3d;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .rsvp .radio-group input[type="radio"]:checked + .custom-radio::after {
+            opacity: 1;
+        }
+
         .rsvp button {
             font-size: 1.2rem;
             padding: 10px 20px;
@@ -124,25 +172,33 @@
 </head>
 <body>
     <div class="hero">
-        <h1>Dear Guests!</h1>
+        <h1>Дорогие гости!</h1>
     </div>
 
     <div class="content">
         <div class="section">
-            <h2>We Invite You</h2>
-            <p>Join us on this special day as we celebrate our love with our closest friends and family.</p>
+            <h2>Приглашаение</h2>
+            <p>В этот торжественный день мы очень хотим оказаться в окружении самых близких и дорогих нам людей</p>
         </div>
 
         <div class="section">
-            <h2>Wedding Details</h2>
-            <p class="details">Date: July 12, 2025</p>
-            <p class="details">Time: Welcome - 14:00 | Ceremony - 15:00 | Banquet - 16:00</p>
-            <p class="details">Will be soon</p>
+            <h2>Детали торжества</h2>
+            <p class="details">Дата: 12 июля 2025</p>
+            <p class="details">Время: Фуршет - 14:00 | Торжественная церемония - 15:00 | Банкет - 16:00</p>
+            <p class="details">Ресторан "Берег"</p>
         </div>
 
         <div class="section">
-            <h2>Dress Code</h2>
-            <p>Please adhere to the following color palette for your attire:</p>
+            <p>Главное для нас - твоё внимание, а твои пожелания в конверте будут лучшим подарком, который поможет исполнить наши мечты.</p>
+        </div>
+
+        <div class="section">
+            <p>Будем благодарны, если ты воздержишься от криков "Горько!", ведь поцелуй - это знак выражения чувств, и он не может быть исполнен по заказу.</p>
+        </div>
+
+        <div class="section">
+            <h2>Дресс код</h2>
+            <p>Мы очень старались сделать праздник красивым и будем рады, если в своём наряде ты поддержишь цыетовую гамму нашей свадьбы:</p>
             <div class="color-palette">
                 <div class="color-box" style="background-color: #F8D9E0;"></div>
                 <div class="color-box" style="background-color: #C8E1D4;"></div>
@@ -160,26 +216,39 @@
         </div>
 
         <div class="section rsvp">
-            <h2>RSVP</h2>
-            <p>Let us know if you can join us!</p>
+            <h2>Просьба ответить</h2>
+            <p>Будем признательны, если ты сообщишь нам о своём решении удобным для тебя способом до 30 марат. Или просто заполни эту форму.</p>
             <form id="rsvpForm">
-                <label for="nameInput">Your Name:</label>
-                <input type="text" id="nameInput" placeholder="Enter your name" />
-                <input type="text" id="surnameInput" placeholder="Enter your surname" />
+                <label for="nameInput">Ответ</label>
+                <input type="text" id="nameInput" placeholder="Ваше имя" />
+                <input type="text" id="surnameInput" placeholder="Ваша фамилия" />
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="rsvp" value="accept" checked=true/>
+                        <span class="custom-radio"></span>
+                        Обязательно буду
+                    </label>
+                    <label>
+                        <input type="radio" name="rsvp" value="decline" />
+                        <span class="custom-radio"></span>
+                        К сожалению, не смогу присутствовать
+                    </label>
+                </div>
                 <br />
-                <button onclick="sendRSVP()">RSVP Now</button>
+                <button onclick="sendRSVP()">Послать ответ</button>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Wedding of Vladimir & Julia</p>
+        <p>&copy; 2025 Свадьба Владимира и Юлии</p>
     </footer>
 </body>
 <script>
     function sendRSVP() {
         const name = document.getElementById('nameInput').value; // Get value from text field
         const surame = document.getElementById('surnameInput').value; // Get value from text field
+        const rsvpStatus = document.querySelector('input[name="rsvp"]:checked');
         if (!name) {
             alert('Please enter your name.');
             return;
@@ -189,6 +258,8 @@
             return;
         }
 
+        const response = rsvpStatus.value === 'accept' ? 'Обязательно буду' : 'К сожалению, не смогу присутствовать';
+
         fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
             method: 'POST',
             headers: {
@@ -196,7 +267,8 @@
             },
             body: JSON.stringify({
                 name: name,
-                surame: surame
+                surame: surame,
+                answer: response,
             })
         })
         .then(response => response.json())
