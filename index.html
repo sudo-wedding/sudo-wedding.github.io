@@ -306,7 +306,7 @@
             return;
         }
 
-        fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
+        fetch('https://live-seagull-present.ngrok-free.app/wedding/guests/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -314,7 +314,7 @@
             body: JSON.stringify({
                 name: name,
                 surname: surname,
-                response: response
+                accept: response == 'accept'
             })
         })
         .then(response => response.json())
