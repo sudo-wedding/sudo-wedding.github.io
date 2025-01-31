@@ -266,11 +266,10 @@
         <div class="section rsvp">
             <h2>Просьба ответить</h2>
             <p>Будем признательны, если ты сообщишь нам о своём решении удобным для тебя способом до 30 марат. Или просто заполни эту форму.</p>
-            <!-- <form id="rsvpForm">
-                <label for="nameInput">Ответ</label>
-                <input type="text" id="nameInput" placeholder="Ваше имя" />
-                <input type="text" id="surnameInput" placeholder="Ваша фамилия" /> -->
-                <!-- <div class="radio-group">
+            <form action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="text" name="surname" placeholder="Ваша фамилия" required>
+                <div class="radio-group">
                     <label>
                         <input type="radio" name="rsvp" value="accept" checked/>
                         <span class="custom-radio"></span>
@@ -282,14 +281,9 @@
                         К сожалению, не смогу присутствовать
                     </label>
                 </div>
-                <br /> -->
-                <!-- <button onclick="sendRSVP()">Послать ответ</button> -->
-            <form action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
-                <input type="text" name="name" placeholder="Ваше имя" required>
-                <input type="text" name="surname" placeholder="Ваша фамилия" required>
+                <br />
                 <button type="submit">Послать ответ</button>
             </form>
-            <!-- </form> -->
         </div>
     </div>
 
