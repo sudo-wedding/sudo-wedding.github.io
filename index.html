@@ -284,6 +284,7 @@
                 </div>
                 <br />
                 <button onclick="sendRSVP()">Послать ответ</button>
+                <button onclick="test()">Test</button>
             </form>
         </div>
     </div>
@@ -316,6 +317,20 @@
                 surname: surname
             })
         })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('RSVP sent successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error sending RSVP');
+        });
+    }
+</script>
+<script>
+    function test() {
+        fetch(`https://live-seagull-present.ngrok-free.app/wedding/guests/test`)
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
