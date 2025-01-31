@@ -269,20 +269,21 @@
             <form action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="text" name="surname" placeholder="Ваша фамилия" required>
-                <!-- <div class="radio-group">
+                <div class="radio-group">
                     <label>
-                        <input type="radio" name="rsvp" value="accept" checked/>
+                        <input type="radio" name="accept" value=true checked/>
                         <span class="custom-radio"></span>
                         Обязательно буду
                     </label>
                     <label>
-                        <input type="radio" name="rsvp" value="decline" />
+                        <input type="radio" name="accept" value=false />
                         <span class="custom-radio"></span>
                         К сожалению, не смогу присутствовать
                     </label>
-                </div> -->
+                </div>
                 <br />
-                <button type="submit">Послать ответ</button>
+                <!-- <button type="submit">Послать ответ</button> -->
+                <button onclick="window.location.href = ':https://sudo-wedding.github.io';" type="submit" value="Submit request" />
             </form>
         </div>
     </div>
