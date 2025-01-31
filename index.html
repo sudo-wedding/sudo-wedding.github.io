@@ -266,11 +266,11 @@
         <div class="section rsvp">
             <h2>Просьба ответить</h2>
             <p>Будем признательны, если ты сообщишь нам о своём решении удобным для тебя способом до 30 марат. Или просто заполни эту форму.</p>
-            <form id="rsvpForm">
+            <!-- <form id="rsvpForm">
                 <label for="nameInput">Ответ</label>
                 <input type="text" id="nameInput" placeholder="Ваше имя" />
-                <input type="text" id="surnameInput" placeholder="Ваша фамилия" />
-                <div class="radio-group">
+                <input type="text" id="surnameInput" placeholder="Ваша фамилия" /> -->
+                <!-- <div class="radio-group">
                     <label>
                         <input type="radio" name="rsvp" value="accept" checked/>
                         <span class="custom-radio"></span>
@@ -282,9 +282,13 @@
                         К сожалению, не смогу присутствовать
                     </label>
                 </div>
-                <br />
-                <button onclick="sendRSVP()">Послать ответ</button>
-                <button onclick="test()">Test</button>
+                <br /> -->
+                <!-- <button onclick="sendRSVP()">Послать ответ</button> -->
+                <form action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <input type="text" name="surname" placeholder="Ваша фамилия" required>
+                    <button type="submit">Послать ответ</button>
+                </form>
             </form>
         </div>
     </div>
@@ -293,56 +297,4 @@
         <p>&copy; 2025 Свадьба Владимира и Юлии</p>
     </footer>
 </body>
-<script>
-    function sendRSVP() {
-        const name = document.getElementById('nameInput').value; // Get value from text field
-        const surname = document.getElementById('surnameInput').value; // Get value from text field
-        // const response = document.querySelector('input[name="rsvp"]:checked').value;
-        if (!name) {
-            alert('Please enter your name.');
-            return;
-        }
-        if (!surname) {
-            alert('Please enter your surname.');
-            return;
-        }
-
-        fetch('https://live-seagull-present.ngrok-free.app/wedding/guests/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            mode: 'no-cors',
-            body: JSON.stringify({
-                name: name,
-                surname: surname
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            alert('RSVP sent successfully!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error sending RSVP');
-        });
-    }
-</script>
-<script>
-    function test() {
-        fetch(`https://live-seagull-present.ngrok-free.app/wedding/guests/test`, {
-            mode: 'no-cors'
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            alert('RSVP sent successfully!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error sending RSVP');
-        });
-    }
-</script>
 </html>
