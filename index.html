@@ -282,12 +282,16 @@
                     </label>
                 </div>
                 <br />
-                <!-- <button type="submit">Послать ответ</button> -->
-                <input onclick="window.location.href = ':https://sudo-wedding.github.io';" type="submit" value="Submit request" class="button"/>
+                <button type="submit" id="submitBtn">Послать ответ</button>
             </form>
         </div>
     </div>
-
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", myFunction);  
+        function myFunction() {  
+          window.location.href="https://sudo-wedding.github.io";  
+        }
+    </script>
     <footer>
         <p>&copy; 2025 Свадьба Владимира и Юлии</p>
     </footer>
