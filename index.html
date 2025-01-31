@@ -5,7 +5,217 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation</title>
     <style>
-        /* Your existing CSS styles */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500&display=swap');
+
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            background: url('background.jpg') no-repeat center; /* Local image */
+            background-color: #e6f0e6;
+            color: #2f4f2f;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0); /* Semi-transparent white overlay */
+            color: #2f4f2f;
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem; /* Smaller font size for mobile */
+            margin: 0;
+            color: #3d6b3d;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 100%;
+            margin: auto;
+            background: #f0f8f0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border: 5px solid #3d6b3d;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 1.8rem; /* Smaller font size for mobile */
+            color: #3d6b3d;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .section p {
+            font-size: 1rem; /* Smaller font size for mobile */
+            line-height: 1.6;
+        }
+
+        .details {
+            font-size: 1.2rem; /* Smaller font size for mobile */
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap; /* Allow colors to wrap on smaller screens */
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .color-box {
+            width: 30px; /* Smaller color boxes for mobile */
+            height: 30px;
+            margin: 5px;
+            border-radius: 50%;
+            border: 2px solid #3d6b3d;
+        }
+
+        /* Fancy Radio Buttons */
+        .rsvp .radio-group {
+            display: flex;
+            flex-direction: column; /* Stack radio buttons vertically */
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rsvp .radio-group label {
+            display: flex;
+            align-items: center;
+            font-size: 1rem; /* Smaller font size for mobile */
+            display: flex;
+            justify-content: center; /* Ensures both the radio button and text are centered */
+            width: 100%; /* Ensures alignment respects parent container */
+            text-align: center; /* Centers the text */
+            color: #3d6b3d;
+            cursor: pointer;
+        }
+
+        .rsvp .radio-group input[type="radio"] {
+            display: none; /* Hide default radio buttons */
+        }
+
+        .rsvp .radio-group .custom-radio {
+            width: 18px; /* Smaller radio buttons for mobile */
+            height: 18px;
+            border: 2px solid #3d6b3d;
+            border-radius: 50%;
+            margin-right: 8px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .rsvp .radio-group .custom-radio::after {
+            content: '';
+            width: 10px; /* Smaller inner circle for mobile */
+            height: 10px;
+            background-color: #3d6b3d;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .rsvp .radio-group input[type="radio"]:checked + .custom-radio::after {
+            opacity: 1;
+        }
+
+        .rsvp button {
+            font-size: 1rem; /* Smaller font size for mobile */
+            padding: 10px 20px;
+            background-color: #3d6b3d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%; /* Full-width button for mobile */
+        }
+
+        .rsvp button:hover {
+            background-color: #2f4f2f;
+        }
+
+        footer {
+            padding: 15px;
+            background-color: #2f4f2f;
+            color: white;
+            font-size: 0.9rem; /* Smaller font size for mobile */
+        }
+
+        /* New styles for the input field */
+        .rsvp input[type="text"] {
+            width: 100%; /* Full-width inputs for mobile */
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #3d6b3d;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            color: #2f4f2f;
+            background-color: #f0f8f0;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .rsvp input[type="text"]:focus {
+            border-color: #2f4f2f;
+        }
+
+        .rsvp label {
+            font-size: 1rem; /* Smaller font size for mobile */
+            color: #3d6b3d;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Media Queries for Larger Screens */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4rem; /* Larger font size for tablets and desktops */
+            }
+
+            .content {
+                padding: 40px 20px;
+                max-width: 800px;
+            }
+
+            .section h2 {
+                font-size: 2.2rem; /* Larger font size for tablets and desktops */
+            }
+
+            .section p {
+                font-size: 1.2rem; /* Larger font size for tablets and desktops */
+            }
+
+            .details {
+                font-size: 1.4rem; /* Larger font size for tablets and desktops */
+            }
+
+            .color-box {
+                width: 40px; /* Larger color boxes for tablets and desktops */
+                height: 40px;
+            }
+
+            .rsvp .radio-group {
+                flex-direction: row; /* Horizontal radio buttons for larger screens */
+            }
+
+            .rsvp button {
+                width: auto; /* Auto-width button for larger screens */
+            }
+
+            .rsvp input[type="text"] {
+                width: 60%; /* Narrower inputs for larger screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -14,12 +224,49 @@
     </div>
 
     <div class="content">
-        <!-- Your existing content -->
+        <div class="section">
+            <h2>Приглашаение</h2>
+            <p>В этот торжественный день мы очень хотим оказаться в окружении самых близких и дорогих нам людей</p>
+        </div>
+
+        <div class="section">
+            <h2>Детали торжества</h2>
+            <p class="details">Дата: 12 июля 2025</p>
+            <p class="details">Время: Фуршет - 14:00 | Торжественная церемония - 15:00 | Банкет - 16:00</p>
+            <p class="details">Ресторан "Берег"</p>
+        </div>
+
+        <div class="section">
+            <p>Главное для нас - твоё внимание, а твои пожелания в конверте будут лучшим подарком, который поможет исполнить наши мечты.</p>
+        </div>
+
+        <div class="section">
+            <p>Будем благодарны, если ты воздержишься от криков "Горько!", ведь поцелуй - это знак выражения чувств, и он не может быть исполнен по заказу.</p>
+        </div>
+
+        <div class="section">
+            <h2>Дресс код</h2>
+            <p>Мы очень старались сделать праздник красивым и будем рады, если в своём наряде ты поддержишь цветовую гамму нашей свадьбы:</p>
+            <div class="color-palette">
+                <div class="color-box" style="background-color: #F8D9E0;"></div>
+                <div class="color-box" style="background-color: #C8E1D4;"></div>
+                <div class="color-box" style="background-color: #D0C8F6;"></div>
+                <div class="color-box" style="background-color: #FFE7C7;"></div>
+                <div class="color-box" style="background-color: #C7DFF4;"></div>
+                <div class="color-box" style="background-color: #D9F1C6;"></div>
+                <div class="color-box" style="background-color: #F4C9D7;"></div>
+                <div class="color-box" style="background-color: #B8D9D9;"></div>
+                <div class="color-box" style="background-color: #E1C5F4;"></div>
+                <div class="color-box" style="background-color: #F6E4A1;"></div>
+                <div class="color-box" style="background-color: #6B3D4D;"></div>
+                <div class="color-box" style="background-color: #2D4A55;"></div>
+            </div>
+        </div>
 
         <div class="section rsvp">
             <h2>Просьба ответить</h2>
             <p>Будем признательны, если ты сообщишь нам о своём решении удобным для тебя способом до 30 марат. Или просто заполни эту форму.</p>
-            <form id="rsvpForm" action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
+            <form action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="text" name="surname" placeholder="Ваша фамилия" required>
                 <div class="radio-group">
@@ -39,7 +286,6 @@
             </form>
         </div>
     </div>
-
     <script>
         document.getElementById("rsvpForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent the default form submission
@@ -62,7 +308,6 @@
             });
         });
     </script>
-
     <footer>
         <p>&copy; 2025 Свадьба Владимира и Юлии</p>
     </footer>
