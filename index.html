@@ -68,9 +68,9 @@
         }
 
         .color-box {
-            width: 30px; /* Smaller color boxes for mobile */
-            height: 30px;
-            margin: 5px;
+            width: 45px; /* Smaller color boxes for mobile */
+            height: 45px;
+            margin: 10px;
             border-radius: 50%;
             border: 2px solid #3d6b3d;
         }
@@ -176,6 +176,55 @@
             display: block;
         }
 
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #3d6b3d;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            font-size: 1.2rem;
+            color: #2f4f2f;
+        }
+
+        .popup button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            background-color: #3d6b3d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .popup button:hover {
+            background-color: #2f4f2f;
+        }
+
         /* Media Queries for Larger Screens */
         @media (min-width: 768px) {
             .hero h1 {
@@ -200,8 +249,8 @@
             }
 
             .color-box {
-                width: 40px; /* Larger color boxes for tablets and desktops */
-                height: 40px;
+                width: 60px; /* Larger color boxes for tablets and desktops */
+                height: 60px;
             }
 
             .rsvp .radio-group {
@@ -248,84 +297,96 @@
             <h2>Дресс код</h2>
             <p>Мы очень старались сделать праздник красивым и будем рады, если в своём наряде ты поддержишь цветовую гамму нашей свадьбы:</p>
             <div class="color-palette">
-                <div class="color-box" style="background-color: #F8D9E0;"></div>
-                <div class="color-box" style="background-color: #C8E1D4;"></div>
-                <div class="color-box" style="background-color: #D0C8F6;"></div>
-                <div class="color-box" style="background-color: #FFE7C7;"></div>
-                <div class="color-box" style="background-color: #C7DFF4;"></div>
-                <div class="color-box" style="background-color: #D9F1C6;"></div>
-                <div class="color-box" style="background-color: #F4C9D7;"></div>
-                <div class="color-box" style="background-color: #B8D9D9;"></div>
-                <div class="color-box" style="background-color: #E1C5F4;"></div>
-                <div class="color-box" style="background-color: #F6E4A1;"></div>
-                <div class="color-box" style="background-color: #6B3D4D;"></div>
-                <div class="color-box" style="background-color: #2D4A55;"></div>
+                <div class="color-box" style="background-color: #CFCFCF;"></div>
+                <div class="color-box" style="background-color: #C3CDCF;"></div>
+                <div class="color-box" style="background-color: #B2ACA0;"></div>
+                <div class="color-box" style="background-color: #909575;"></div>
+                <div class="color-box" style="background-color: #1A2030;"></div>
+                <div class="color-box" style="background-color: #D6BAA4;"></div>
             </div>
         </div>
 
         <div class="section rsvp">
             <h2>Просьба ответить</h2>
             <p>Будем признательны, если ты сообщишь нам о своём решении удобным для тебя способом до 30 марат. Или просто заполни эту форму.</p>
-            <form id="rsvpForm">
-                <label for="nameInput">Ответ</label>
-                <input type="text" id="nameInput" placeholder="Ваше имя" />
-                <input type="text" id="surnameInput" placeholder="Ваша фамилия" />
+            <form id="rsvpForm" action="https://live-seagull-present.ngrok-free.app/wedding/guests/create" method="POST">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="text" name="surname" placeholder="Ваша фамилия" required>
                 <div class="radio-group">
                     <label>
-                        <input type="radio" name="rsvp" value="accept" checked/>
+                        <input type="radio" name="accept" value=true checked/>
                         <span class="custom-radio"></span>
                         Обязательно буду
                     </label>
                     <label>
-                        <input type="radio" name="rsvp" value="decline" />
+                        <input type="radio" name="accept" value=false />
                         <span class="custom-radio"></span>
                         К сожалению, не смогу присутствовать
                     </label>
                 </div>
                 <br />
-                <button onclick="sendRSVP()">Послать ответ</button>
+                <button type="submit" id="submitBtn">Послать ответ</button>
             </form>
         </div>
     </div>
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <h3>Отправка данных...</h3>
+            <p>Пожалуйста, подождите, ваши данные отправляются.</p>
+            <button id="closePopupBtn">Закрыть</button>
+        </div>
+    </div>
+    <script>
+        // Get references to the form, popup overlay, and close button
+        const form = document.getElementById("rsvpForm");
+        const popupOverlay = document.getElementById("popupOverlay");
+        const closePopupBtn = document.getElementById("closePopupBtn");
 
+        // Handle form submission
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show the popup
+            popupOverlay.style.display = "flex";
+
+            // Send the form data using fetch
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Update the popup message
+                    document.querySelector(".popup h3").textContent = "Данные отправлены!";
+                    document.querySelector(".popup p").textContent = "Спасибо за ваш ответ!";
+
+                    // Redirect after the user closes the popup
+                    closePopupBtn.addEventListener("click", function() {
+                        window.location.href = "https://sudo-wedding.github.io";
+                    });
+                } else {
+                    // Update the popup message if submission fails
+                    document.querySelector(".popup h3").textContent = "Ошибка";
+                    document.querySelector(".popup p").textContent = "Не удалось отправить данные. Пожалуйста, попробуйте еще раз.";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Update the popup message if an error occurs
+                document.querySelector(".popup h3").textContent = "Ошибка";
+                document.querySelector(".popup p").textContent = "Произошла ошибка при отправке данных.";
+            });
+        });
+
+        // Close the popup when the close button is clicked
+        closePopupBtn.addEventListener("click", function() {
+            popupOverlay.style.display = "none";
+        });
+    </script>
     <footer>
         <p>&copy; 2025 Свадьба Владимира и Юлии</p>
     </footer>
 </body>
-<script>
-    function sendRSVP() {
-        const name = document.getElementById('nameInput').value; // Get value from text field
-        const surname = document.getElementById('surnameInput').value; // Get value from text field
-        const response = document.querySelector('input[name="rsvp"]:checked').value;
-        if (!name) {
-            alert('Please enter your name.');
-            return;
-        }
-        if (!surname) {
-            alert('Please enter your surname.');
-            return;
-        }
-
-        fetch('https://live-seagull-present.ngrok-free.app/oauth-esia/auth/test', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: name,
-                surname: surname,
-                response: response
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            alert('RSVP sent successfully!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error sending RSVP');
-        });
-    }
-</script>
 </html>
