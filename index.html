@@ -358,6 +358,7 @@
             popupOverlay.style.display = "flex";
 
             // Send the form data using fetch
+            const formData = new FormData(form);
             formData.set("deleted", "false");
 
             fetch(form.action, {
